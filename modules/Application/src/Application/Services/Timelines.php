@@ -1,26 +1,33 @@
 <?php
 namespace Application\Services;
 
-use Application\mapper\Users;
+use Application\mapper;
 class Timelines
 {
-    public function GET($id=null)
+    public function GET($params = null)
     {
-        if(!$id)
+        if(!isset($params['id']))
         {
-            $mapper = new Mapper\Timelines();
+            $mapper = new mapper\Timelines();
             $timelines = $mapper->getAdapter()->fetchAll();
             return json_encode($timelines);
         }
         else 
-            $this->GetONE($id)
+            $this->GetONE($params);
     }
     
-    private function GetONE
+    private function GetONE($params) {
+        $mapper = new mapper\Timelines();
+        $id = array('idevent' => $params['id']);
+        $timeline = $mapper->getAdapter()->fetch($id);
+        
+        echo json_encode($timeline);die;
+        
+    }
     
-    public function POST($data)
+    public function POST()
     {
-    
+        print_r($_POST);
     }
     
     public function PUT($id, $data)

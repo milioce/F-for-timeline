@@ -48,7 +48,6 @@ class Mysql extends MysqlAbstract implements AdapterInterface
                 FROM ".$this->getTable()." 
                 WHERE ".key($id)." = " . $id[key($id)];
         $result = mysqli_query($this->link, $sql);
-        
         return mysqli_fetch_assoc($result);
     }
     
